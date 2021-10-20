@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +68,7 @@
     var container = document.getElementById("container");
 
     async function getMovie(){
+        //http://sunlanddrivein.com/wp-content/uploads/2020/05/comingSoon-1.jpg
         container.innerHTML = null;
 
         let movie = document.getElementById("movie").value;
@@ -83,6 +87,19 @@
 
             let img = document.createElement("img");
                 img.src = movi.Poster;
+
+            if(movi.Poster == undefined){
+
+                img.src = "http://sunlanddrivein.com/wp-content/uploads/2020/05/comingSoon-1.jpg";
+                
+                let err_msg = document.createElement("h2");
+                    err_msg.innerText = "Sorry movie of this name is not awailable"
+                    div.append(img,err_msg);
+
+                    container.append(div);
+                    return
+            }
+
 
             let name = document.createElement("P");
                 name.innerHTML = "Movie Name : " +movi.Title;
