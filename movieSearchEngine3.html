@@ -71,7 +71,7 @@
 
     //http://www.omdbapi.com/?i=tt3896198&apikey=fdf4a105
 
-    let container = document.getElementById("container");
+    var container = document.getElementById("container");
 
     async function getMovie(){
 
@@ -95,21 +95,23 @@
 
         let img = document.createElement("img");
 
-        img.src = movi.Poster;
+        
 
         if (movi.Poster == undefined){
             img.src = "http://sunlanddrivein.com/wp-content/uploads/2020/05/comingSoon-1.jpg";
 
             let error = document.createElement("h2");
-                error.innerHTML = "Sorry movie is not Found";
-                div.append(error);
+                error.innerText = "Sorry movie is not Found";
+                div.append(img,error);
 
                 container.append(div);
                 return
         }
 
+        img.src = movi.Poster;
+
         let name = document.createElement("p");
-        name.innerHTML = "Movie Name : " +movi.Title;
+            name.innerHTML = "Movie Name : " + movi.Title;
                 //console.log(name)
 
             let actors = document.createElement("p");
@@ -131,7 +133,7 @@
 
                     recommended.setAttribute("id", "recommended");
 
-                    recommended.innerText = "Recommended Movies Only For You";
+                    recommended.innerText = "Recommended Movies Only For You...";
 
                     div.append(recommended)
 
