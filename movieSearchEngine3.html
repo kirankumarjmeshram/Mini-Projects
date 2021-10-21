@@ -46,13 +46,22 @@
             font-size: 22px;
             font-weight: 700;
         }
+        #recommended{
+            background-color: burlywood;
+        width: 150px;
+        height: 30px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 5px;
+        color: black
+        }
     </style>
 </head>
 <body>
     <div id="main">
         <h1>Recommended Movies</h1>
         <input type="text" id="movie" placeholder="Enter Movie Name">
-        <button onclick="getMovie()" >Get Movie</button>
+        <button onclick="getMovie()">Get Movie </button>
         <div id="container"></div>
     </div>
 </body>
@@ -74,9 +83,65 @@
 
         let data = await res.json();
 
-        console.log(data)
+        //console.log(data)
+
+        showMovie(data)
 
 
+
+
+    function showMovie(movi){
+        let div = document.createElement("div");
+
+        let img = document.createElement("img");
+
+        img.src = movi.Poster;
+
+        if (movi.Poster == undefined){
+            img.src = "http://sunlanddrivein.com/wp-content/uploads/2020/05/comingSoon-1.jpg";
+
+            let error = document.createElement("h2");
+                error.innerHTML = "Sorry movie is not Found";
+                div.append(error);
+
+                container.append(div);
+                return
+        }
+
+        let name = document.createElement("p");
+        name.innerHTML = "Movie Name : " +movi.Title;
+                //console.log(name)
+
+            let actors = document.createElement("p");
+                actors.innerHTML = movi.Actors;
+
+            let director = document.createElement("p");
+                director.innerHTML = "Dicetor : "+ movi.Director;
+    
+            let year = document.createElement("P");
+                year.innerHTML = "Realesed Year : " + movi.Released;
+
+            let rating = document.createElement("p");
+                rating.innerHTML = "IMDb Rating : " + movi.imdbRating;
+
+                div.append(img,name,actors,director,year,rating);
+
+            if(movi.imdbRating >=8.5){
+                let recommended = document.createElement("div");
+
+                    recommended.setAttribute("id", "recommended");
+
+                    recommended.innerText = "Recommended Movies Only For You";
+
+                    div.append(recommended)
+
+                    
+            }
+
+
+
+              container.append(div);
     }
+
 
 </script>
