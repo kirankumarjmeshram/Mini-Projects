@@ -48,6 +48,50 @@
 
     });
 
+    let container = document.getElementById("container");
+
+    function disSearch(ev){
+        ev.preventDefault();
+
+       content.innerHTML = null;
+        let inp_data = document.getElementById('ResearchRecipe').value ;
+        let body = getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inp_data}`);
+        body.then((res)=>{
+            console.log(res)
+            append(res.meals,container);
+        })
+        .catch((err)=>{
+            console.log("err:",err);
+        });
+    }
+
+    let inpE1 = document.getElementById("ResearchRecipe");
+    inpE1.addEventListener('keyup',()=>{debounce(suggestRec,1000)});
+
+    function suggestRec(){
+        container.innerHTML = null;
+        let entered = document.getElementById("ResearchRecipe").value;
+        if(entered.length<3){
+            return;
+
+        }
+
+        let data = getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${entered}`)
+        data.then((res)=>{
+            console.log(res);
+            append(res.meals,container);
+        })
+    }
+
+    function debounce(func,time){
+        if(debounceSearch!== null){
+            clearTimeout(debounceSearch)
+        }
+        debounceSearch = setTimeout(()=>{
+            func();
+
+        },time);
+    }
    
 
     
