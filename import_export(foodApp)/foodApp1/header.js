@@ -1,16 +1,18 @@
 function navbar(){
-    `<nav class="nav">
+    return `<nav class="nav">
     <div>
-        <h3><a href="index.html">Search Receipe</a></h3> 
-        <i class="material-icon">search</i>
+    <h3><a href="/searchReciepe.html">Search Reciepes</a></h3>
+    <i class="material-icons">search</i>
     </div>
     <div>
-        <h3><a href="receipeOfTheDay.html">Receipe Of The Day</a></h3>
-        <i class="material-icon">restaurant</i>
+        <h3><a href="/recOfDay.html">Recipies of the day</a></h3>
+        <i class="material-icons">restaurant</i>
     </div>
     <div>
-        <h3><a href="showLatestReceipe.html">Latest Recipes</a></h3>
-        <i class="material-icon">Lunch Dining</i>
+    <h3><a href="/showLatRec.html">Latest Recipies</a></h3>
+    <i class="material-icons">lunch_dining</i>
     </div>
-</nav>`
+    </nav>`;
+
+    export  default navbar;
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Recipe </title>
+    <link rel="stylesheet" herf="style.css">
+</head>
+<body>
+
+    <div id="navbar">
+        
+    </div>
+
+    <form id="search_recipe">
+        <input type="text" id="SearchRecipe" placeholder="Search Recipe Items">
+        <input type="submit" id="submitBtn">
+    </form>
+
+    <div id="container"></div>
+
+
+</body>
+</html>
+
+<script type="module">
+
+    //Create a food app which will allow user to 
+    //search receipe by name,
+    // get receipe of the day 
+    //and show latest receipe.
+
+    var debounceSearch;
+
+    import navbar from './import_export(foodApp)\foodApp1\header.js';
+    import{getData,append} from './import_export(foodApp)\foodApp1\getData.js';
+
+    let nav = document.getElementById("navbar");
+
+    nav.innerHTML = navbar();
+
+    let form = document.getElementById("search_recipe");
+
+    form.addEventListener("submit",()=>{
+        disSearch(event);
+
+    });
+
+   //let 
+
+    
+
+    
+
+
+
+</script>
