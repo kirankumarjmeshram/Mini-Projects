@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor Functions Todo list</title>
+    <style>
+        body{
+            background-color: beige;
+            margin-left: 10%;
+            margin-top: 75px;
+            color: rgb(20, 22, 22);
+        }
+      
+    form{
+        
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+    form>input,select{
+        margin: 10px;
+        height: 10%;
+    }
+    #sta{
+        color: red;
+        font-size: large;
+    }
+    #box{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 70% 30%;
+        
+    }
+    #box div{
+       margin-top: 30px;
+       color: blue;
+       font-size: larger;
+   }
+   td{
+         border: 1px solid gray;
+         height: 100%;
+         width: 10%;
+        }
+
+        #taskCount #task{
+            font-size: 100px;
+            color: blueviolet;
+            margin-right: 15%;
+        }
+     
+    </style>
+</head>
+<body>
+    <div id ="box">
+  <form action=""  onsubmit="addList(event)">
+        <h1>Add Your Task</h1>
+    <input type="text" placeholder="Name of Product" id="Name">
+    <input type="number" placeholder="Add Quantity" id="numb">
+    <select name="" id="slt">
+        <option value="">select Priority</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+    </select>  
+    <input type="submit">
+    <label id = "lbl"></label>
+    </form>
+    <div id="taskCount">Total Tasks <span id="task"></span></div>
+</div>
+    <div id=lists>
+        <h1>Task Lists</h1>
+     <table>
+         <tr>
+             <td>Name</td>
+             <td>Quantity</td>
+             <td>Priority</td>
+             <td>status</td>
+             <td>Toggle Status</td>
+         </tr>
+     </table>
+    </div>
+</body>
+</html>
+
+<script>
+
+ function addList(e)
+ {
+     e.preventDefault();
+   let name = document.getElementById("Name") 
+   let quantity = document.getElementById("numb") 
+   let priority = document.getElementById("slt") 
+
+   let table = document.querySelector("table")
+   let row  = document.createElement("tr");
+   let Name  = document.createElement("td");
+   let Quan = document.createElement("td");
+   let Prio  = document.createElement("td");
+   let sta  = document.createElement("td");
+   let tog = document.createElement("td");
+   let del = document.createElement("td");
+
+
+   var addTask = function(name, quan,  prio){
+       this.Name = name;
+       this.quantity = quan;
+       this.priority = prio;
+       this.status = "Done"
+       this.delete = "Remove"   
+   }
+
+   var task = new addTask(name.value,priority.value,quantity.value);
+  
+  
+       if(task.Name == ""|| task.quantity == "" || task.priority == "")
+            {
+                document.getElementById("lbl").textContent = " Can't be Added"
+                document.getElementById("lbl").style.color = "red"
+            }
+            if(task.Name !== "" && task.quantity !== "" && task.priority !== "")
+            {
+                Name.textContent = task.Name ;
+                Quan.textContent = task.quantity ;
+                Prio.textContent = task.priority;
+                sta.textContent = task.status;
+                del.textContent = task.delete; 
+
+                console.log(task.Name, task.quantity, task.priority, task.status, task.delete)
+
+                tog.textContent = "False"
+                tog.style.background = "red"
+                tog.addEventListener("click", togle)
+                sta.setAttribute("id", "sta")
+                sta.addEventListener("click", setStatus);
+                del.addEventListener("click", delrow);
+
+                 
+                row.append(Name,Quan,Prio,sta,tog,del)
+                table.append(row)
+                document.getElementById("lbl").textContent = ""
+            }
+
+            name.value = "";
+            quantity.value = "";
+            priority.value = "";
+
+            let rowss = table.querySelectorAll("tr");
+            let noOfTask = document.getElementById("task")
+            noOfTask.textContent = "    "+ rowss.length -1; 
+ }
+
+
+ function setStatus(e)
+ {  
+    e.target.removeEventListener("click", setStatus);
+    e.target.parentNode.style.backgroundColor ="green"
+    e.target.style.color = "white"
+ } 
+ function delrow(e)
+ {
+     e.target.parentNode.remove();
+
+     let table = document.querySelector("table")
+     let rowss = table.querySelectorAll("tr");
+     let noOfTask = document.getElementById("task")
+     noOfTask.textContent = " "+ rowss.length -1; 
+ }
+
+function togle(e)
+{
+   if(e.target.textContent === "True")
+   {
+    e.target.textContent = "False";
+    e.target.style.background = "red"
+   }else{
+    e.target.textContent = "True";
+    e.target.style.background = "skyblue"
+   }
+}
+</script>
